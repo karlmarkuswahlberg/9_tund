@@ -2,7 +2,7 @@
 	require_once("functions.php");
 	
 	 
-	if(!isset($_SESSION['logged_in_user_id'])){
+	if(!isset($_SESSION['user_id'])){
 		header("Location: login.php");
 	}
 
@@ -13,7 +13,7 @@
   
 ?>
 
-Tere, <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1">Logi välja!</a>
+Tere, <?=$_SESSION['user_email'];?> <a href="?logout=1">Logi välja!</a>
 
 
 

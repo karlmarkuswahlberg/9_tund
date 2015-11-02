@@ -6,7 +6,7 @@
 	
 	//kui kasutaja on sisselogitu, suuna teisele lehele. Ei saaks logituna minna tagasi login lehele.
 	//kontrollin kas sessioonimuutuja on olemas? 
-	if(isset($_SESSION['logged_in_user_id'])){
+	if(isset($_SESSION['user_id'])){
 		header("Location: data.php");
 	}
 	
@@ -43,10 +43,24 @@
 			
                 $hash = hash("sha512", $password);
                 
-                $User->logInUser($email, $hash);
+                $login_response = $User->logInUser($email, $hash);
                 
+				var_dump($login_response); //echoga ei saa kätte, kuna see on objekt.
             
+			
+//trükin välja sisseloginud kasutaja emaili
+echo $login_response->success->user->email;
+
+				//sisselogimine õnnestus.
+				if (isset($login_response->success)){
+					$_SESSION["user_id"] = $login_response->success->user->id;
+					$_SESSION["user_email"] = $login_response->success->user->email;
+					
+					header("Location: data.php");
+					
+				}
             
+			
             }
 		} // login if end
     // *********************

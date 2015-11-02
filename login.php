@@ -43,7 +43,7 @@
 			
                 $hash = hash("sha512", $password);
                 
-                logInUser($email, $hash);
+                $User->logInUser($email, $hash);
                 
             
             
@@ -75,7 +75,7 @@
                 $hash = hash("sha512", $create_password);
                 
                 //salvestan andmebaasi
-               createUser($create_email, $hash); //see on edasi functions.php failis, kuhu siit saadetakse create_email ja hash. 
+               $User->createUser($create_email, $hash); //see on edasi functions.php failis, kuhu siit saadetakse create_email ja hash. 
                 
                 
             }

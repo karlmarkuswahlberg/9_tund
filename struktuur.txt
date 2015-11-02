@@ -9,3 +9,23 @@ functions.php/ logInUser		createUser
 	
 	
 kõik algne on data.php ja funktsioonid tulevad functions.php.
+
+9_tund
+
+klassid- millest klass koosneb?
+nt user.class.php (faili nimi)
+
+pöördumine:
+
+	class User {
+		private name = Markus //(kasutatav ainult klassi sees kuna private)
+	
+		function name (){
+		
+		}
+	
+	}
+	
+	User -> name ( ei saa väljaspool kasutada)
+	
+	__construct() - käivitatakse iga kord kui tekitada klassis uus instants. --> User = newUser();

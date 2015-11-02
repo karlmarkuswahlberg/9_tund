@@ -16,6 +16,27 @@ class User{ //this-iga  saab kätte kui on klass
 		
 		$response = new StdClass(); //selline muutuja võiks iga fn üleval esimene olla.
 		
+		//päring kas email on andmebaasis olemas
+		$stmt = $this->connection->prepare("SELECT id FROM user_sample WHERE email=?");
+		$stmt->bind_param("s", $email);
+		$stmt->bind_result($id);
+		$stmt->execute();
+		//kontrollime, kas saime rea andmeid.
+
+		//kas selline email on?
+		if(!$stmt->fetch()){
+			//ei ole 
+			$error = new StdClass();
+			$error->id = 0;
+			$error->message = "E-mail on vale!";
+			$response->error = $error;
+			return $response;
+		}
+		
+		//OLULINE: tuleb kahe SELECTi vahel stmt closeda.
+		$stmt->close();
+		
+		
 		$stmt = $this->connection->prepare("SELECT id, email FROM user_sample WHERE email=? AND password=?"); //muutus siin. läbi connectioni.
         $stmt->bind_param("ss", $email, $hash);
         $stmt->bind_result($id_from_db, $email_from_db);
@@ -37,9 +58,14 @@ class User{ //this-iga  saab kätte kui on klass
 				
             }else{
 				
-                echo "Wrong credentials!";
 				
-            }
+				$error = new StdClass();
+				$error->id = 1;
+				$error->message = "Vale parool";
+				$response->error = $error;
+			}
+				
+            
 			
             $stmt->close();
 			 
@@ -50,7 +76,6 @@ class User{ //this-iga  saab kätte kui on klass
 		
 		//objekt, kus tagastame errori (id, message) või success'i (message).
 		$response = new StdClass();
-		
 		
 		$stmt = $this->connection->prepare("SELECT id FROM user_sample WHERE email=?");
 		$stmt->bind_param("s", $create_email);

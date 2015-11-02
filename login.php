@@ -49,7 +49,7 @@
             
 			
 //trükin välja sisseloginud kasutaja emaili
-echo $login_response->success->user->email;
+//echo $login_response->success->user->email;
 
 				//sisselogimine õnnestus.
 				if (isset($login_response->success)){
@@ -120,6 +120,13 @@ echo $login_response->success->user->email;
 <body>
 
   <h2>Log in</h2>
+  
+  <?php if(isset($login_response->error)): ?>
+  
+  <p style="color:red;"><?=$login_response->error->message;?></p>
+  
+  <?php endif; ?>
+  
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
   	<input name="email" type="email" placeholder="E-post" value="<?php echo $email; ?>"> <?php echo $email_error; ?><br><br>
   	<input name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>"> <?php echo $password_error; ?><br><br>

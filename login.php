@@ -45,7 +45,7 @@
                 
                 $login_response = $User->logInUser($email, $hash);
                 
-				var_dump($login_response); //echoga ei saa kätte, kuna see on objekt.
+				//var_dump($login_response); //echoga ei saa kätte, kuna see on objekt.
             
 			
 //trükin välja sisseloginud kasutaja emaili
@@ -55,6 +55,8 @@
 				if (isset($login_response->success)){
 					$_SESSION["user_id"] = $login_response->success->user->id;
 					$_SESSION["user_email"] = $login_response->success->user->email;
+					
+					$_SESSION["login_message"] = $login_response->success->message;
 					
 					header("Location: data.php");
 					

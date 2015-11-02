@@ -45,7 +45,7 @@ class User{ //this-iga  saab kätte kui on klass
 		$stmt->bind_result($id);
 		$stmt->execute();
 		//kontrollime, kas saime rea andmeid. 
-		if($stmt->fetch){
+		if($stmt->fetch()){
 			
 			//siis saime ja kui saime, siis email on juba olemas. ei saa regada.
 			$error = new StdClass();

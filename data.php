@@ -121,3 +121,29 @@ endif; ?>
 </form>
 
 <?php endif; ?>
+
+<?php
+	
+	//saada kätte kõik failid, mis kaustas on.
+	$images = scandir("profile_pics/");
+	
+	
+	//iga pildi kohta tekitame lingi
+	
+	
+	for( $i = 0; $i < count($images); $i++){
+		
+		if($images[$i] != "." &&  $images[$i] != ".."){
+		
+		$link = "profile_pics/".$images[$i];
+		$name = $images[$i];
+		
+		echo '<a href="'.$link.'">'.$name.'</a>';
+		}
+	}
+	
+
+?>
+
+
+
